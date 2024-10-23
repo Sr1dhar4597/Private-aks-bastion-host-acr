@@ -23,7 +23,7 @@ SSH Keys for accessing the Bastion Host
 GitHub Account for version control
 Setup and Usage
 1. Clone the Repository
-git clone https://github.com/your-username/private-aks-bastion-acr.git
+git clone[ https://github.com/your-username/private-aks-bastion-acr.git](https://github.com/chandan-cloudops/Private-aks-bastion-host-acr.git)
 cd private-aks-bastion-acr
 2. Configure the Environment Variables
 Create a .tfvars file or set environment variables for the following parameters:
@@ -38,14 +38,10 @@ ssh_public_key_path = "~/.ssh/id_rsa.pub"
 3. Initialize Terraform
 Run the following command to initialize the Terraform working directory. This will download the necessary provider plugins.
 
-bash
-Copy code
 terraform init
 4. Plan the Infrastructure
 Generate and review the execution plan to see what Terraform will provision:
 
-bash
-Copy code
 terraform plan -var-file="example.tfvars"
 5. Apply the Terraform Configuration
 Apply the configuration to provision the resources:
@@ -69,8 +65,6 @@ az acr login --name <acr-name>
 docker build -t <acr-name>.azurecr.io/my-app:v1 .
 docker push <acr-name>.azurecr.io/my-app:v1
 Repository Structure
-bash
-Copy code
 .
 ├── main.tf               # Main Terraform configuration
 ├── variables.tf          # Input variables for the infrastructure
@@ -78,6 +72,7 @@ Copy code
 ├── example.tfvars        # Example variables file
 ├── modules/              # Modularized Terraform code (VNet, AKS, Bastion)
 ├── README.md             # Documentation (this file)
+
 Key Features
 Private AKS Cluster: The Kubernetes API and node pools are isolated within a virtual network.
 Bastion Host: Secure access to the AKS cluster without exposing it to the public internet.
