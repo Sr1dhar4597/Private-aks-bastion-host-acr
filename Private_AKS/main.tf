@@ -32,7 +32,9 @@ provider "azurerm" {
   }
 }
 
-
+provider "azuread" {
+  tenant_id = var.tenant_id
+}
 
 # Random Pet Name
 resource "random_pet" "unique_name" {
@@ -46,20 +48,20 @@ resource "azurerm_resource_group" "aks_rg" {
 }
 
 # # Storage Account for Terraform State
-# resource "azurerm_storage_account" "tfstate" {
-#   name                     = "${lower(var.resource_group_name)}${lower(var.environment)}tfstate"
-#   resource_group_name      = azurerm_resource_group.aks_rg.name
-#   location                 = azurerm_resource_group.aks_rg.location
-#   account_tier             = "Standard"
-#   account_replication_type = "LRS"
-# }
+ resource "azurerm_storage_account" "tfstate" {
+   name                     = "${lower(var.resource_group_name)}${lower(var.environment)}tfstate"
+   resource_group_name      = azurerm_resource_group.aks_rg.name
+   location                 = azurerm_resource_group.aks_rg.location
+   account_tier             = "Standard"
+   account_replication_type = "LRS"
+ }
 
-# # Storage Container for TFState
-# resource "azurerm_storage_container" "tfstate" {
-#   name                  = "tfstate"
-#   storage_account_name  = azurerm_storage_account.tfstate.name
-#   container_access_type = "private"
-# }
+# Storage Container for TFState
+ resource "azurerm_storage_container" "tfstate" {
+   name                  = "tfstate"
+   storage_account_name  = azurerm_storage_account.tfstate.name
+   container_access_type = "private"
+ }
 
 # Virtual Network
 resource "azurerm_virtual_network" "aksvnet" {
@@ -258,7 +260,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
     name                 = "systempool"
     vm_size              = var.default_node_size  # e.g., "Standard_DS2_v2"
     orchestrator_version = data.azurerm_kubernetes_service_versions.current.latest_version
-    zones                = [1, 2, 3]
+    zones                = [3]
     enable_auto_scaling  = true
     max_count            = var.max_node_count      # e.g., 3
     min_count            = var.min_node_count       # e.g., 1
