@@ -8,4 +8,4 @@ ssh_public_key      = "~/.ssh/aks-prod-sshkeys-terraform/aksprodsshkey.pub"  # P
 ssh_private_key     = "~/.ssh/aks-prod-sshkeys-terraform/aksprodsshkey"
 acr_name            = "chandancloudops96"  # Ensure this is globally unique
 acr_sku             = "Basic"
-bastion_vm_size     =  "Standard_B1s"       #"Standard_D2s_v3"      
+bastion_vm_size     =  "Standard_B1s"       #"Standard_D2s_v3"    
