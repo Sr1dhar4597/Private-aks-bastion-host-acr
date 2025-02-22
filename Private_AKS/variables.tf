@@ -63,3 +63,8 @@ variable "acr_sku" {
   type        = string
   default     = "Basic"
 }
+
+variable "tenant_id" {
+  description = "The tenant ID of the Azure Active Directory"
+  type        = string
+}
